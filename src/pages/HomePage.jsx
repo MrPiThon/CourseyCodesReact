@@ -9,8 +9,8 @@ const HomePage = () => {
             <Space/>
             <About/>
 
-            <h1 className="text-center text-custom-lighter text-3xl">Projects</h1>
-            <div className="flex flex-row">
+            <h1 className="text-center text-custom-lighter md:text-3xl lg:text-3xl sm:text-2xl">Projects</h1>
+            <div className="flex lg:flex-row md:flex-row sm:flex-col">
                 <ProjectCard
                     title={"Zombie Siege"}
                     description={"A round-based Minecraft Zombie Survival Server chasing the feeling of OG CoD Zombies"}
