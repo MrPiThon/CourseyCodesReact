@@ -47,31 +47,46 @@ const Space = () => {
             });
         };
 
-        // const drawText = () => {
-        //     ctx.font = '100px Arial';
-        //     ctx.fillStyle = 'white';
-        //     ctx.textAlign = 'center';
-        //     ctx.fillText('MrPiThon', canvas.width / 2, canvas.height / 2);
-        // };
+        const drawText = (time) => {
+            // Pulsing MrPiThon text
+            const scale = 1 + 0.2 * Math.sin(time / 500);  // Pulsing effect
 
-        const animate = () => {
+            ctx.save();
+            ctx.translate(canvas.width / 2, canvas.height / 2);
+            ctx.scale(scale, scale);
+            ctx.font = '100px Arial';
+            ctx.fillStyle = 'white';
+            ctx.textAlign = 'center';
+            ctx.fillText('MrPiThon', 0, 0);
+            ctx.restore();
+        };
+
+        const drawScrollDown = (time) => {
+            // Animate the vertical position of the "Scroll Down" text
+            const yOffset = 10 * Math.sin(time / 300);  // Up and down movement
+
+            ctx.save();
+            ctx.font = '24px Arial';
+            ctx.fillStyle = 'white';
+            ctx.textAlign = 'center';
+            ctx.fillText('⬇ Scroll Down ⬇', canvas.width / 2, canvas.height - 50 + yOffset);
+            ctx.restore();
+        };
+
+        const animate = (time) => {
             drawStars();
-            // drawText();
+            drawText(time);
+            drawScrollDown(time);
             requestAnimationFrame(animate);
         };
 
         initializeStars();
-        animate();
+        animate(0);  // Start animation loop
     }, []);
 
     return (
         <div className="relative h-screen w-screen">
             <canvas className="absolute top-0 left-0 w-full h-full" ref={canvasRef} id="space"></canvas>
-            <img
-                src="/MrPiThonHeroAnimated.gif"
-                alt="MrPiThon Logo"
-                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-            />
         </div>
     );
 };

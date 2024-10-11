@@ -9,7 +9,7 @@ const HomePage = () => {
             <Space/>
             <About/>
             <h1 className="text-center text-custom-lighter md:text-3xl lg:text-3xl sm:text-2xl">Projects</h1>
-            <div className="flex lg:flex-row md:flex-row sm:flex-col">
+            <div className="flex flex-col md:flex-row lg:flex-row">
                 <ProjectCard
                     title={"Zombie Siege"}
                     description={"A round-based Minecraft Zombie Survival Server chasing the feeling of OG CoD Zombies"}
@@ -18,8 +18,8 @@ const HomePage = () => {
                 />
                 <ProjectCard
                     title={"A1 Pools"}
-                    description={"A website for the A1 Pool Company in the US, not affiliated with the real A1 Pool Company"}
-                    url={"https://sunny-stroopwafel-e64f2e.netlify.app/"}
+                    description={"A website for the A1 Pool Company in the US. Created with Vite/React"}
+                    url={"https://a1-pools.netlify.app/"}
                     image="/A1 Pool Hero Animated.gif"
                 />
                 <ProjectCard
