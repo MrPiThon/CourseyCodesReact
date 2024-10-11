@@ -47,18 +47,16 @@ const Space = () => {
             });
         };
 
-        const drawText = () => {
-            ctx.font = '100px Arial';
-            ctx.fillStyle = 'white';
-            ctx.textAlign = 'center';
-            ctx.fillText('MrPiThon', canvas.width / 2, canvas.height / 2);
-            ctx.font = '30px Arial';
-            ctx.fillText("Coursey.Codes", canvas.width / 2, canvas.height / 2 - 420);
-        };
+        // const drawText = () => {
+        //     ctx.font = '100px Arial';
+        //     ctx.fillStyle = 'white';
+        //     ctx.textAlign = 'center';
+        //     ctx.fillText('MrPiThon', canvas.width / 2, canvas.height / 2);
+        // };
 
         const animate = () => {
             drawStars();
-            drawText();
+            // drawText();
             requestAnimationFrame(animate);
         };
 
@@ -66,7 +64,16 @@ const Space = () => {
         animate();
     }, []);
 
-    return <canvas ref={canvasRef} id="space"></canvas>;
+    return (
+        <div className="relative h-screen w-screen">
+            <canvas className="absolute top-0 left-0 w-full h-full" ref={canvasRef} id="space"></canvas>
+            <img
+                src="/MrPiThonHeroAnimated.gif"
+                alt="MrPiThon Logo"
+                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+            />
+        </div>
+    );
 };
 
 export default Space;

@@ -15,7 +15,7 @@ export default {
           lighter: '#f6bafb',
           lightest: "#f6e1ff",
         }
-      }
+      },
     },
     fontFamily: {
       'default': ["Coda", "sans-serif"]
