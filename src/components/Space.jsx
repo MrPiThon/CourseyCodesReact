@@ -11,6 +11,11 @@ const Space = () => {
         const numStars = 500;
         const speed = 2;
 
+        // Function to detect if the device is mobile
+        const isMobile = () => {
+            return window.innerWidth <= 768; // Adjust breakpoint as needed
+        };
+
         const initializeStars = () => {
             stars.current = []; // Reset stars array on initialization
             for (let i = 0; i < numStars; i++) {
@@ -58,15 +63,19 @@ const Space = () => {
 
         const drawText = (time) => {
             // Adjust font size based on canvas width
-            const baseFontSize = canvas.width * 0.1; // 10% of canvas width
-            const fontSize = Math.max(Math.min(baseFontSize, 100), 40); // Clamp font size between 40px and 100px
+            let baseFontSize = canvas.width * 0.1; // 10% of canvas width
+            baseFontSize = Math.max(Math.min(baseFontSize, 80), 24); // Clamp font size between 24px and 80px
 
-            const scale = 1 + 0.2 * Math.sin(time / 500); // Pulsing effect
+            // Adjust pulsing effect for mobile devices
+            let scale = 1 + 0.2 * Math.sin(time / 500); // Pulsing effect
+            if (isMobile()) {
+                scale = 1 + 0.1 * Math.sin(time / 500); // Reduce pulsing effect on mobile
+            }
 
             ctx.save();
-            ctx.translate(canvas.width / 2, canvas.height / 2);
+            ctx.translate(canvas.width / 2, canvas.height / 2 - (isMobile() ? 30 : 0)); // Move text up slightly on mobile
             ctx.scale(scale, scale);
-            ctx.font = `${fontSize}px Arial`;
+            ctx.font = `${baseFontSize}px Arial`;
             ctx.fillStyle = 'white';
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle'; // Center vertically
@@ -76,18 +85,24 @@ const Space = () => {
 
         const drawScrollDown = (time) => {
             // Adjust font size based on canvas width
-            const baseFontSize = canvas.width * 0.03; // 3% of canvas width
-            const fontSize = Math.max(Math.min(baseFontSize, 30), 16); // Clamp font size between 16px and 30px
+            let baseFontSize = canvas.width * 0.03; // 3% of canvas width
+            baseFontSize = Math.max(Math.min(baseFontSize, 24), 12); // Clamp font size between 12px and 24px
 
             // Animate the vertical position of the "Scroll Down" text
             const yOffset = 10 * Math.sin(time / 300); // Up and down movement
 
             ctx.save();
-            ctx.font = `${fontSize}px Arial`;
+            ctx.font = `${baseFontSize}px Arial`;
             ctx.fillStyle = 'white';
             ctx.textAlign = 'center';
             ctx.textBaseline = 'bottom';
-            const textYPosition = canvas.height - fontSize + yOffset - 10; // Adjusted position
+
+            // Adjust position for mobile devices
+            let textYPosition = canvas.height - baseFontSize + yOffset - 10;
+            if (isMobile()) {
+                textYPosition = canvas.height - baseFontSize - 70 + yOffset; // Move text up by 70 pixels on mobile
+            }
+
             ctx.fillText('⬇ Scroll Down ⬇', canvas.width / 2, textYPosition);
             ctx.restore();
         };
@@ -110,7 +125,11 @@ const Space = () => {
 
     return (
         <div className="relative h-screen w-screen">
-            <canvas className="absolute top-0 left-0 w-full h-full" ref={canvasRef} id="space"></canvas>
+            <canvas
+                className="absolute top-0 left-0 w-full h-full"
+                ref={canvasRef}
+                id="space"
+            ></canvas>
         </div>
     );
 };
