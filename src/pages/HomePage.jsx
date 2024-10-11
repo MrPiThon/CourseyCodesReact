@@ -26,7 +26,7 @@ const HomePage = () => {
                     title={"Coursey.Codes"}
                     description={"This website! This was made from scratch with React, Vite, TailwindCSS and Canvas"}
                     url={"https://coursey.codes"}
-                    image="/MrPiThon Hero Logo Animated.gif"
+                    image="/CourseyCodesLogo.png"
                 />
             </div>
             <Contact/>

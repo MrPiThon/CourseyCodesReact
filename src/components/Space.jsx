@@ -7,13 +7,22 @@ const Space = () => {
     useEffect(() => {
         const canvas = canvasRef.current;
         const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+
+        // Function to resize canvas to fit the window
+        const resizeCanvas = () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initializeStars(); // Re-initialize stars on resize
+        };
+
+        resizeCanvas(); // Initial resize
+        window.addEventListener('resize', resizeCanvas); // Adjust canvas on window resize
 
         const numStars = 500;
         const speed = 2;
 
         const initializeStars = () => {
+            stars.current = []; // Reset stars array on initialization
             for (let i = 0; i < numStars; i++) {
                 stars.current.push({
                     x: (Math.random() - 0.5) * canvas.width,
@@ -48,28 +57,38 @@ const Space = () => {
         };
 
         const drawText = (time) => {
-            // Pulsing MrPiThon text
-            const scale = 1 + 0.2 * Math.sin(time / 500);  // Pulsing effect
+            // Adjust font size based on canvas width
+            const baseFontSize = canvas.width * 0.1; // 10% of canvas width
+            const fontSize = Math.max(Math.min(baseFontSize, 100), 40); // Clamp font size between 40px and 100px
+
+            const scale = 1 + 0.2 * Math.sin(time / 500); // Pulsing effect
 
             ctx.save();
             ctx.translate(canvas.width / 2, canvas.height / 2);
             ctx.scale(scale, scale);
-            ctx.font = '100px Arial';
+            ctx.font = `${fontSize}px Arial`;
             ctx.fillStyle = 'white';
             ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle'; // Center vertically
             ctx.fillText('MrPiThon', 0, 0);
             ctx.restore();
         };
 
         const drawScrollDown = (time) => {
+            // Adjust font size based on canvas width
+            const baseFontSize = canvas.width * 0.03; // 3% of canvas width
+            const fontSize = Math.max(Math.min(baseFontSize, 30), 16); // Clamp font size between 16px and 30px
+
             // Animate the vertical position of the "Scroll Down" text
-            const yOffset = 10 * Math.sin(time / 300);  // Up and down movement
+            const yOffset = 10 * Math.sin(time / 300); // Up and down movement
 
             ctx.save();
-            ctx.font = '24px Arial';
+            ctx.font = `${fontSize}px Arial`;
             ctx.fillStyle = 'white';
             ctx.textAlign = 'center';
-            ctx.fillText('⬇ Scroll Down ⬇', canvas.width / 2, canvas.height - 50 + yOffset);
+            ctx.textBaseline = 'bottom';
+            const textYPosition = canvas.height - fontSize + yOffset - 10; // Adjusted position
+            ctx.fillText('⬇ Scroll Down ⬇', canvas.width / 2, textYPosition);
             ctx.restore();
         };
 
@@ -81,7 +100,12 @@ const Space = () => {
         };
 
         initializeStars();
-        animate(0);  // Start animation loop
+        animate(0); // Start animation loop
+
+        // Clean up event listener on unmount
+        return () => {
+            window.removeEventListener('resize', resizeCanvas);
+        };
     }, []);
 
     return (
