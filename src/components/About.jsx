@@ -9,8 +9,7 @@ const About = () => {
                     California Institute of Applied Technology
                 </a>.
                 My passion for coding has always been in the Game Development space, however I am expanding my horizons
-                to
-                Website Development.
+                to Website Development.
                 *talk more about myself*
             </p>
         </div>

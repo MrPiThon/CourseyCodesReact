@@ -8,16 +8,6 @@ const Space = () => {
         const canvas = canvasRef.current;
         const ctx = canvas.getContext('2d');
 
-        // Function to resize canvas to fit the window
-        const resizeCanvas = () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            initializeStars(); // Re-initialize stars on resize
-        };
-
-        resizeCanvas(); // Initial resize
-        window.addEventListener('resize', resizeCanvas); // Adjust canvas on window resize
-
         const numStars = 500;
         const speed = 2;
 
@@ -31,6 +21,16 @@ const Space = () => {
                 });
             }
         };
+
+        // Function to resize canvas to fit the window
+        const resizeCanvas = () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initializeStars(); // Re-initialize stars on resize
+        };
+
+        resizeCanvas(); // Initial resize
+        window.addEventListener('resize', resizeCanvas); // Adjust canvas on window resize
 
         const drawStars = () => {
             ctx.fillStyle = 'black';
