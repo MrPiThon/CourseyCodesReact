@@ -5,7 +5,7 @@ import Contact from "../components/Contact.jsx";
 
 const HomePage = () => {
     return (
-        <div>
+        <div className={"cursor-default"}>
             <Space/>
             <About/>
             <h1 className="text-center text-custom-lighter md:text-3xl lg:text-3xl sm:text-2xl">Projects</h1>

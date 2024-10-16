@@ -1,6 +1,6 @@
 const Footer = () => {
     return (
-        <footer className={"text-center bottom-0"}>
+        <footer className={"text-center bottom-0 cursor-default"}>
             {/*<img className="mx-auto mb-2" src="/ssl_trust_seal.png" alt="SSL Trust"></img>*/}
             {/* No longer secured by positiveSSL, now goes through Let's Encrypt, who do not provide an image */}
             <div className="grid-rows-1">
