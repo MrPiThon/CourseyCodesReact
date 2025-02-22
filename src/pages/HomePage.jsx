@@ -9,7 +9,7 @@ const HomePage = () => {
             <Space/>
             <About/>
             <h1 className="text-center text-custom-lighter md:text-3xl lg:text-3xl sm:text-2xl">Projects</h1>
-            <div className="flex flex-col md:flex-row lg:flex-row">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 <ProjectCard
                     title={"Zombie Siege"}
                     description={"A round-based Minecraft Zombie Survival Server chasing the feeling of OG CoD Zombies"}
@@ -27,6 +27,12 @@ const HomePage = () => {
                     description={"This website! This was made from scratch with React, Vite, TailwindCSS and Canvas"}
                     url={"https://coursey.codes"}
                     image="/CourseyCodesLogo.png"
+                />
+                <ProjectCard
+                    title={"PyColonies"}
+                    description={"A website made for a fictional modpack website, created using WordPress"}
+                    url={"https://mrpithon.wordpress.com"}
+                    image="/PyColonies.png"
                 />
             </div>
             <Contact/>

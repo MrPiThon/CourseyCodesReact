@@ -5,7 +5,7 @@ const Footer = () => {
             {/* No longer secured by positiveSSL, now goes through Let's Encrypt, who do not provide an image */}
             <div className="grid-rows-1">
                 <p className={"text-sm text-custom-secondary"}>
-                    &copy; 2024 Coursey Codes. All rights reserved</p>
+                    &copy; 2025 Coursey Codes. All rights reserved</p>
             </div>
         </footer>
     );
